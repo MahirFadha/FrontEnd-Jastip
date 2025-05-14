@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
 import com.example.cobaproject.ui.screen.ActivityScreen
 import com.example.cobaproject.ui.screen.AkunScreen
+import com.example.cobaproject.ui.screen.BerandaScreen
 
 @Composable
 fun MainScreen() {
@@ -56,7 +57,7 @@ fun MainScreen() {
         ) {
             composable("akun") { AkunScreen(navController) }
             composable("aktivitas") { ActivityScreen(navController) }
-            composable("beranda") { /* BerandaScreen(navController) */ }
+            composable("beranda") { BerandaScreen(navController) }
         }
     }
 }
