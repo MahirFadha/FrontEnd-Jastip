@@ -58,17 +58,19 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                 ) {
                     MenuCard(
                         icon = R.drawable.lock,
-                        label = "Buying",
-                        highlighted = selectedItem == "Buying",
+                        label = "Pagi",
+                        highlighted = selectedItem == "Pagi",
                         modifier = Modifier.weight(1f),
-                        onClick = { selectedItem = "Buying" }
+                        onClick = {
+                            selectedItem = "Pagi"
+                            navController.navigate("pagi")}
                     )
                     MenuCard(
                         icon = R.drawable.lock,
-                        label = "Selling",
-                        highlighted = selectedItem == "Selling",
+                        label = "Siang",
+                        highlighted = selectedItem == "Siang",
                         modifier = Modifier.weight(1f),
-                        onClick = { selectedItem = "Selling" }
+                        onClick = { selectedItem = "Siang" }
                     )
                 }
 
@@ -78,10 +80,10 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                 ) {
                     MenuCard(
                         icon = R.drawable.lock,
-                        label = "Videos",
-                        highlighted = selectedItem == "Videos",
+                        label = "Sore",
+                        highlighted = selectedItem == "Sore",
                         modifier = Modifier.weight(1f),
-                        onClick = { selectedItem = "Videos" }
+                        onClick = { selectedItem = "Sore" }
                     )
                     Spacer(modifier = Modifier.weight(1f))
                 }
