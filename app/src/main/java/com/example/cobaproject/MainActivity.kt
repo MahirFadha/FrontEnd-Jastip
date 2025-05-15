@@ -15,6 +15,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.cobaproject.navigation.AppNavGraph
 import com.example.cobaproject.ui.components.MainScreen
 import com.example.cobaproject.ui.screen.AkunScreen
 import com.example.cobaproject.ui.screen.BerandaScreen
@@ -33,12 +34,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CobaProjectTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    MainScreen()
-                }
+                val navController = rememberNavController()
+                AppNavGraph(navController = navController)
+//                Box(
+//                    modifier = Modifier.fillMaxSize(),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    MainScreen()
+//                }
             }
         }
     }
