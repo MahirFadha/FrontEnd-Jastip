@@ -57,17 +57,21 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     MenuCard(
-                        icon = R.drawable.lock,
+                        icon = R.drawable.kurir,
                         label = "Pagi",
+                        jamReady = "08.00", // Tambah ini
                         highlighted = selectedItem == "Pagi",
                         modifier = Modifier.weight(1f),
                         onClick = {
                             selectedItem = "Pagi"
-                            navController.navigate("pagi")}
+                            navController.navigate("pagi")
+                        }
                     )
+
                     MenuCard(
-                        icon = R.drawable.lock,
+                        icon = R.drawable.kurir,
                         label = "Siang",
+                        jamReady = "13.00",
                         highlighted = selectedItem == "Siang",
                         modifier = Modifier.weight(1f),
                         onClick = { selectedItem = "Siang" }
@@ -79,8 +83,9 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     MenuCard(
-                        icon = R.drawable.lock,
+                        icon = R.drawable.kurir,
                         label = "Sore",
+                        jamReady = "16.00",
                         highlighted = selectedItem == "Sore",
                         modifier = Modifier.weight(1f),
                         onClick = { selectedItem = "Sore" }
@@ -105,6 +110,7 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
 fun MenuCard(
     icon: Int,
     label: String,
+    jamReady: String,
     highlighted: Boolean = false,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
@@ -113,7 +119,7 @@ fun MenuCard(
         modifier = modifier
             .aspectRatio(1f)
             .padding(4.dp)
-            .clickable { onClick() } // <- agar bisa diklik
+            .clickable { onClick() }
             .background(
                 color = if (highlighted) Color(0xFF7B61FF) else Color.White,
                 shape = RoundedCornerShape(16.dp)
@@ -129,12 +135,18 @@ fun MenuCard(
         Image(
             painter = painterResource(id = icon),
             contentDescription = label,
-            modifier = Modifier.size(32.dp)
+            modifier = Modifier.size(45.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = label,
             color = if (highlighted) Color.White else Color.Black
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+        Text(
+            text = "Ready $jamReady",
+            fontSize = 12.sp,
+            color = if (highlighted) Color.White else Color.Gray
         )
     }
 }

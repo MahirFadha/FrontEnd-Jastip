@@ -26,7 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
 
 @Composable
-fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun SoreScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -48,7 +48,7 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
                 )
 
                 Text(
-                    text = "PAGI",
+                    text = "SORE",
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.align(Alignment.Center)
@@ -101,8 +101,8 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(12.dp))
 
             Column {
-                Text("Geprek Dalang", fontSize = 16.sp, fontWeight = FontWeight.Medium)
-                Text("15.000", fontSize = 14.sp, color = Color.Gray)
+                Text("Pentol", fontSize = 16.sp, fontWeight = FontWeight.Medium)
+                Text("5.000", fontSize = 14.sp, color = Color.Gray)
             }
         }
     }
@@ -110,7 +110,7 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPagiScreen() {
+fun PreviewSoreScreen() {
     val navController = rememberNavController()
-    PagiScreen(navController = navController)
+    SoreScreen(navController = navController)
 }
