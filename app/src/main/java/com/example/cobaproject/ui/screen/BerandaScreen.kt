@@ -20,6 +20,7 @@ import com.example.cobaproject.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.*
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
@@ -34,16 +35,31 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.Start
         ) {
-            Text(text = "Hi, Adelia", fontSize = 25.sp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "Hi, Adelia", fontSize = 25.sp)
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.keranjang),
+                    contentDescription = "Keranjang",
+                    modifier = Modifier
+                        .size(32.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.bg),
-                contentDescription = "Promo",
+                painter = painterResource(id = R.drawable.frame),
+                contentDescription = "Iklan",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(170.dp)
+                    .height(150.dp), // atur sesuai keinginan
+                contentScale = ContentScale.Crop // atau ContentScale.Fit
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -94,14 +110,6 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                 }
             }
         }
-
-        Image(
-            painter = painterResource(id = R.drawable.keranjang),
-            contentDescription = "Keranjang",
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .size(32.dp)
-        )
     }
 }
 
@@ -121,12 +129,12 @@ fun MenuCard(
             .padding(4.dp)
             .clickable { onClick() }
             .background(
-                color = if (highlighted) Color(0xFF7B61FF) else Color.White,
+                color = if (highlighted) Color.White else Color(0xFFEF9651),
                 shape = RoundedCornerShape(16.dp)
             )
             .border(
-                width = 1.dp,
-                color = if (highlighted) Color.Transparent else Color.Black,
+                width = 2.dp,
+                color = Color.Black,
                 shape = RoundedCornerShape(16.dp)
             ),
         verticalArrangement = Arrangement.Center,
@@ -140,13 +148,13 @@ fun MenuCard(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = label,
-            color = if (highlighted) Color.White else Color.Black
+            color = Color.Black
         )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Ready $jamReady",
             fontSize = 12.sp,
-            color = if (highlighted) Color.White else Color.Gray
+            color = Color.Black
         )
     }
 }

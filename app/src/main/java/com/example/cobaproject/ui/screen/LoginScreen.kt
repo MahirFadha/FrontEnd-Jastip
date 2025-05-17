@@ -1,5 +1,6 @@
 package com.example.cobaproject.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,10 +33,9 @@ fun LoginScreen(navController: NavHostController,) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Logo
-        Icon(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        Image(
+            painter = painterResource(id = R.drawable.logoo),
             contentDescription = null,
-            tint = Color.Gray,
             modifier = Modifier.size(80.dp)
         )
 
