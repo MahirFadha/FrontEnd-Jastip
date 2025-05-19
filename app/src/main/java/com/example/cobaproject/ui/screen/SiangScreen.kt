@@ -11,6 +11,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +31,7 @@ import com.example.cobaproject.R
 
 @Composable
 fun SiangScreen(navController: NavController, modifier: Modifier = Modifier) {
+    var isLiked by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -100,10 +105,31 @@ fun SiangScreen(navController: NavController, modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            Column {
+            Column(
+                modifier = Modifier.weight(1f) // Supaya teks ambil ruang sisa
+            ){
                 Text("Geprek Dalang", fontSize = 16.sp, fontWeight = FontWeight.Medium)
                 Text("15.000", fontSize = 14.sp, color = Color.Gray)
             }
+            Spacer(modifier = Modifier.width(12.dp))
+
+            // Ikon love
+                Icon(
+                    painter = painterResource(id = R.drawable.love),
+                    contentDescription = "Love",
+                    tint = if (isLiked) Color.Red else Color.LightGray,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .padding(end = 8.dp)
+                        .clickable { isLiked = !isLiked }
+                )
+            // Tambahkan ikon keranjang
+            Icon(
+                painter = painterResource(id = R.drawable.keranjang), // Ganti dengan resource kamu
+                contentDescription = "Keranjang",
+                tint = Color.Black,
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }

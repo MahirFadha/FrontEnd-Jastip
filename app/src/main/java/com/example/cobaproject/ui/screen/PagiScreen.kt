@@ -11,6 +11,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,10 +31,11 @@ import com.example.cobaproject.R
 
 @Composable
 fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
+    var isLiked by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Bar Atas dengan teks di tengah dan ikon kembali di kiri, plus garis bawah
+        // Header
         Column {
             Box(
                 modifier = Modifier
@@ -42,7 +47,7 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
                     contentDescription = "Back",
                     modifier = Modifier
                         .align(Alignment.CenterStart)
-                        .padding(start = 16.dp) // Pindah padding ke sini
+                        .padding(start = 16.dp)
                         .size(24.dp)
                         .clickable { navController.popBackStack() }
                 )
@@ -58,7 +63,7 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
             Divider(
                 color = Color.Gray,
                 thickness = 1.dp,
-                modifier = Modifier.fillMaxWidth() // Sekarang benar-benar full
+                modifier = Modifier.fillMaxWidth()
             )
         }
 
@@ -75,12 +80,12 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(50),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp) // Padding lokal di sini
+                .padding(horizontal = 20.dp)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Item Menu
+        // Item Menu dengan Icon Keranjang di Sebelah Kanan
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -100,13 +105,37 @@ fun PagiScreen(navController: NavController, modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            Column {
+            Column(
+                modifier = Modifier.weight(1f) // Supaya teks ambil ruang sisa
+            ) {
                 Text("Geprek Dalang", fontSize = 16.sp, fontWeight = FontWeight.Medium)
                 Text("15.000", fontSize = 14.sp, color = Color.Gray)
             }
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            // Ikon love
+            Icon(
+                painter = painterResource(id = R.drawable.love),
+                contentDescription = "Love",
+                tint = if (isLiked) Color.Red else Color.LightGray,
+                modifier = Modifier
+                    .size(32.dp)
+                    .padding(end = 8.dp)
+                    .clickable { isLiked = !isLiked }
+            )
+
+            // Tambahkan ikon keranjang
+            Icon(
+                painter = painterResource(id = R.drawable.keranjang), // Ganti dengan resource kamu
+                contentDescription = "Keranjang",
+                tint = Color.Black,
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

@@ -20,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
 
 @Composable
-fun LoginScreen(navController: NavHostController,) {
+fun LoginScreen(navController: NavHostController) {
     var nim by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -34,9 +34,9 @@ fun LoginScreen(navController: NavHostController,) {
     ) {
         // Logo
         Image(
-            painter = painterResource(id = R.drawable.logoo),
+            painter = painterResource(id = R.drawable.lgo),
             contentDescription = null,
-            modifier = Modifier.size(80.dp)
+            modifier = Modifier.size(100.dp)
         )
 
         Spacer(modifier = Modifier.height(20.dp))

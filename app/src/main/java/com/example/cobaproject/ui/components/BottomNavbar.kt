@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -33,35 +34,41 @@ import com.example.cobaproject.R
 import com.example.cobaproject.ui.screen.ActivityScreen
 import com.example.cobaproject.ui.screen.AkunScreen
 import com.example.cobaproject.ui.screen.BerandaScreen
+import com.example.cobaproject.ui.screen.EditPfScreen
+import com.example.cobaproject.ui.screen.KeranjangScreen
+import com.example.cobaproject.ui.screen.PagiScreen
 
 @Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+fun MainScreen(parentNavController: NavHostController) {
+    val bottomNavController = rememberNavController() // controller khusus untuk bottom nav
+    val currentBackStack = bottomNavController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStack.value?.destination?.route
 
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
                 selectedItem = currentRoute ?: "",
-                navController = navController
+                navController = bottomNavController
             )
         }
     ) { innerPadding ->
-        // Ini penting: padding diterapkan di sini agar tidak tertutup tombol sistem
         NavHost(
-            navController = navController,
-            startDestination = "akun",
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
+            navController = bottomNavController,
+            startDestination = "beranda", // langsung ke beranda sesuai keinginanmu
+            modifier = Modifier.padding(innerPadding)
         ) {
-            composable("akun") { AkunScreen(navController) }
-            composable("aktivitas") { ActivityScreen(navController) }
-            composable("beranda") { BerandaScreen(navController) }
+            composable("beranda") {
+                BerandaScreen(navController = parentNavController)
+            }
+            composable("akun") {
+                AkunScreen(navController = parentNavController)
+            }
+            composable("aktivitas") {
+                ActivityScreen(navController = parentNavController)
+            }
         }
     }
 }
-
 
 
 @Composable

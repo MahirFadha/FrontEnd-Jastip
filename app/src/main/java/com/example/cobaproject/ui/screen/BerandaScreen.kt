@@ -48,6 +48,9 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                     contentDescription = "Keranjang",
                     modifier = Modifier
                         .size(32.dp)
+                        .clickable {
+                            navController.navigate("keranjang")
+                        }
                 )
             }
 
@@ -90,7 +93,10 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                         jamReady = "13.00",
                         highlighted = selectedItem == "Siang",
                         modifier = Modifier.weight(1f),
-                        onClick = { selectedItem = "Siang" }
+                        onClick = {
+                            selectedItem = "Siang"
+                            navController.navigate("siang")
+                        }
                     )
                 }
 
@@ -104,7 +110,10 @@ fun BerandaScreen(navController: NavController, modifier: Modifier = Modifier) {
                         jamReady = "16.00",
                         highlighted = selectedItem == "Sore",
                         modifier = Modifier.weight(1f),
-                        onClick = { selectedItem = "Sore" }
+                        onClick = {
+                            selectedItem = "Sore"
+                            navController.navigate("sore")
+                        }
                     )
                     Spacer(modifier = Modifier.weight(1f))
                 }

@@ -1,8 +1,10 @@
 package com.example.cobaproject.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,64 +24,61 @@ import com.example.cobaproject.R
 fun AkunScreen(navController: NavController,
                modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 70.dp, start = 24.dp, end = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .padding(top = 70.dp, start = 24.dp, end = 24.dp)
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(modifier = Modifier.size(100.dp)) {
+        Box(modifier = Modifier.size(100.dp)) {
+            Icon(
+                painter = painterResource(id = R.drawable.round_account_circle_24),
+                contentDescription = "Profile Icon",
+                tint = Color.Gray,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
+            )
+
+            Box(
+                modifier = Modifier
+                    .size(28.dp)
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 2.dp, y = 2.dp)
+                    .clip(CircleShape)
+                    .background(Color.Gray)
+                    .clickable {
+                        navController.navigate("edit_profile")
+                    }
+            ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.round_account_circle_24),
-                    contentDescription = "Profile Icon",
-                    tint = Color.Gray,
+                    painter = painterResource(id = R.drawable.baseline_edit_24),
+                    contentDescription = "Edit Icon",
+                    tint = Color.White,
                     modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                        .background(Color.LightGray)
+                        .size(16.dp)
+                        .align(Alignment.Center)
                 )
-
-                Box(
-                    modifier = Modifier
-                        .size(28.dp)
-                        .align(Alignment.BottomEnd)
-                        .offset(x = 2.dp, y = 2.dp)
-                        .clip(CircleShape)
-                        .background(Color.Gray)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_edit_24),
-                        contentDescription = "Edit Icon",
-                        tint = Color.White,
-                        modifier = Modifier
-                            .size(16.dp)
-                            .align(Alignment.Center)
-                    )
-                }
             }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            SettingItem(
-                iconRes = R.drawable.round_account_circle_24,
-                text = "Favorit"
-            )
-            SettingItem(
-                iconRes = R.drawable.round_account_circle_24,
-                text = "Pilihan Bahasa"
-            )
-            SettingItem(
-                iconRes = R.drawable.round_account_circle_24,
-                text = "Pusat Bantuan"
-            )
         }
-//        BottomNavigationBar(selectedItem = "akun", navController = navController)
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        SettingItem(
+            iconRes = R.drawable.round_account_circle_24,
+            text = "Favorit"
+        )
+        SettingItem(
+            iconRes = R.drawable.round_account_circle_24,
+            text = "Pilihan Bahasa"
+        )
+        SettingItem(
+            iconRes = R.drawable.round_account_circle_24,
+            text = "Pusat Bantuan"
+        )
     }
 }
+
 
 @Composable
 fun SettingItem(
@@ -116,11 +115,11 @@ fun SettingItem(
             )
         }
 //         Divider langsung di bawah item, lebar penuh
-//        Divider(
-//            color = Color.LightGray,
-//            thickness = 1.dp,
-//            modifier = Modifier.fillMaxWidth()
-//        )
+        Divider(
+            color = Color.LightGray,
+            thickness = 1.dp,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
