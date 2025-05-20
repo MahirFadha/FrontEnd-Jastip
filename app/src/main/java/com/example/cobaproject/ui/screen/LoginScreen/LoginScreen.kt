@@ -1,4 +1,4 @@
-package com.example.cobaproject.ui.screen
+package com.example.cobaproject.ui.screen.LoginScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,12 +15,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController,  loginViewModel: LoginViewModel = viewModel(factory = LoginViewModelFactory())) {
     var nim by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -111,9 +112,34 @@ fun LoginScreen(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        val loginState by loginViewModel.loginState.collectAsState()
+        when (loginState) {
+            is LoginState.Loading -> {
+                // Misalnya tampilkan loading dialog
+                CircularProgressIndicator()
+            }
+
+            is LoginState.Success -> {
+                // Navigasi ke halaman utama, contoh:
+                LaunchedEffect(Unit) {
+                    navController.navigate("Beranda") {
+                        popUpTo("Login") { inclusive = true }
+                    }
+                }
+            }
+
+            is LoginState.Error -> {
+                // Tampilkan pesan error
+                val error = (loginState as LoginState.Error).error
+                Text(text = error, color = Color.Red)
+            }
+
+            LoginState.Idle -> {} // Tidak ada aksi
+        }
+
         // Tombol Daftar
         Button(
-            onClick = { /* TODO: aksi daftar */ },
+            onClick = { loginViewModel.login(nim,password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp),
