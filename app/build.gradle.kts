@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -34,11 +35,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+//        languageVersion = "2.1"
+//        apiVersion = "2.1"
     }
     buildFeatures {
         compose = true
     }
 }
+
 
 dependencies {
 
@@ -74,4 +78,11 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.kotlin.stdlib)
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.22"))
+
 }

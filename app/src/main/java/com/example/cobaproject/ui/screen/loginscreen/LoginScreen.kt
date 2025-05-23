@@ -1,4 +1,4 @@
-package com.example.cobaproject.ui.screen.LoginScreen
+package com.example.cobaproject.ui.screen.loginscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
 
 @Composable
-fun LoginScreen(navController: NavHostController,  loginViewModel: LoginViewModel = viewModel(factory = LoginViewModelFactory())) {
+fun LoginScreen(navController: NavHostController) {
     var nim by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -112,34 +112,34 @@ fun LoginScreen(navController: NavHostController,  loginViewModel: LoginViewMode
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        val loginState by loginViewModel.loginState.collectAsState()
-        when (loginState) {
-            is LoginState.Loading -> {
-                // Misalnya tampilkan loading dialog
-                CircularProgressIndicator()
-            }
-
-            is LoginState.Success -> {
-                // Navigasi ke halaman utama, contoh:
-                LaunchedEffect(Unit) {
-                    navController.navigate("Beranda") {
-                        popUpTo("Login") { inclusive = true }
-                    }
-                }
-            }
-
-            is LoginState.Error -> {
-                // Tampilkan pesan error
-                val error = (loginState as LoginState.Error).error
-                Text(text = error, color = Color.Red)
-            }
-
-            LoginState.Idle -> {} // Tidak ada aksi
-        }
+//        val loginState by loginViewModel.loginState.collectAsState()
+//        when (loginState) {
+//            is LoginState.Loading -> {
+//                // Misalnya tampilkan loading dialog
+//                CircularProgressIndicator()
+//            }
+//
+//            is LoginState.Success -> {
+//                // Navigasi ke halaman utama, contoh:
+//                LaunchedEffect(Unit) {
+//                    navController.navigate("Beranda") {
+//                        popUpTo("Login") { inclusive = true }
+//                    }
+//                }
+//            }
+//
+//            is LoginState.Error -> {
+//                // Tampilkan pesan error
+//                val error = (loginState as LoginState.Error).error
+//                Text(text = error, color = Color.Red)
+//            }
+//
+//            LoginState.Idle -> {} // Tidak ada aksi
+//        }
 
         // Tombol Daftar
         Button(
-            onClick = { loginViewModel.login(nim,password) },
+            onClick = {  },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp),

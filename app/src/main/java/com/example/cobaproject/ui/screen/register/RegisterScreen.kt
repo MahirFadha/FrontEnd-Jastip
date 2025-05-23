@@ -1,4 +1,4 @@
-package com.example.cobaproject.ui.screen
+package com.example.cobaproject.ui.screen.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,18 +14,21 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cobaproject.R
-import com.example.cobaproject.ui.screen.LoginScreen.LoginScreen
+import com.example.cobaproject.ui.screen.loginscreen.LoginScreen
 
 @Composable
-fun SignUpScreen(
+fun RegisterScreen(
     navController: NavHostController,
-    modifier: Modifier = Modifier) {
-    var nama by remember { mutableStateOf("") }
+    modifier: Modifier = Modifier,
+    viewModel: RegisterViewModel = hiltViewModel()) {
+    var state = viewModel.state
+    var name by remember { mutableStateOf("") }
     var nim by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -53,8 +56,8 @@ fun SignUpScreen(
 
         // Nama
         OutlinedTextField(
-            value = nama,
-            onValueChange = { nama = it },
+            value = name,
+            onValueChange = { name = it },
             label = { Text("Nama") },
             placeholder = { Text("Masukkan nama", color = Color.Gray) },
             leadingIcon = {
@@ -147,7 +150,7 @@ fun SignUpScreen(
 
         // Tombol Daftar
         Button(
-            onClick = { /* TODO: aksi daftar */ },
+            onClick = { viewModel.register(name,nim,password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp),
@@ -156,6 +159,21 @@ fun SignUpScreen(
         ) {
             Text(text = "Sign Up", color = Color.White, fontSize = 16.sp)
         }
+        when{
+            state.isLoading -> CircularProgressIndicator()
+            state.succes -> Text("Selamat datang ${state.user?.name}")
+            state.error != null -> Text("Error: ${state.error}")
+        }
+
+        LaunchedEffect(key1 = state.succes) {
+            if (state.succes)
+                navController.navigate("login"){
+                    popUpTo("register"){
+                        inclusive = true
+                    }
+                }
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
@@ -181,7 +199,7 @@ fun SignUpScreen(
 @Composable
 fun SignUpScreenPreview() {
     val navController = rememberNavController() // dummy controller
-    SignUpScreen(navController = navController)
+    RegisterScreen(navController = navController)
 }
 
 @Composable
@@ -189,7 +207,7 @@ fun MainNav() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "akun") {
-        composable("register") { SignUpScreen(navController) }
+        composable("register") { RegisterScreen(navController) }
         composable("login") { LoginScreen(navController) }
     }
 }
